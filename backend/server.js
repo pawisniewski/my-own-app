@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const connectToDB = require('./db');
 
 const app = express();
 
@@ -25,6 +26,11 @@ app.use('*', (req, res) => {
 
 /* START SERVER */
 const port = process.env.PORT || 8000;
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log('Server is running on port: ' + port);
 });
+
+/* CONNECT TO DB */
+connectToDB();
+
+module.exports = server;
