@@ -14,7 +14,7 @@ describe('Product', () => {
       const uri = await fakeDB.getUri();
       mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     } 
-    catch(err) {
+    catch (err) {
       console.log(err);
     }
   });
