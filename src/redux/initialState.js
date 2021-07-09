@@ -1,6 +1,7 @@
 export const initialState = {
   products: {
     data: [],
+    current: null,
     request: {
       type: '',
       active: false,

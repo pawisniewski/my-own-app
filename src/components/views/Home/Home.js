@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAll, fetchAll } from '../../../redux/productsRedux';
+
+import ProductList from '../../features/ProductList/ProductList';
 
 import styles from './Home.module.scss';
 
-const Home = () => (
-  <div className={styles.root}>
-    <h1>Homepage</h1>
-  </div>
-);
+const Home = () => {
+  const dispatch = useDispatch();
+  const products = useSelector(getAll);
+
+  useEffect(() => {
+    dispatch(fetchAll());
+  }, [dispatch]);
+  
+  return (
+    <div className={styles.root}>
+      <ProductList products={products} />
+    </div>
+  );
+};
 
 export default Home;
