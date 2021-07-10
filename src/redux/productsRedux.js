@@ -35,7 +35,7 @@ export const fetchAll = () => {
   };
 };
 export const fetchOne = (id) => {
-  return async(dispatch) => {
+  return async (dispatch) => {
     dispatch(startRequest('GET_ONE'));
     try {
       let res = await axios.get(`${API_URL}/products/${id}`);
@@ -81,7 +81,7 @@ export const reducer = (statePart = [], action = {}) => {
           active: false,
           error: false,
         },
-        present: productData,
+        current: productData,
       };
     }
     case REQUEST_ERROR: {

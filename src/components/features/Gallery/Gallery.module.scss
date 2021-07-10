@@ -1,0 +1,13 @@
+@import '../../../styles/settings.scss';
+
+.root {
+    margin: $base-size 0;
+    .mainImage {
+      margin-bottom: $base-size/1.5;
+    }
+    .thumbs, img {
+      height: 100%;
+      width: 100%;
+      border-radius: 5px;
+    }
+}

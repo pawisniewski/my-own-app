@@ -5,7 +5,7 @@ exports.getAll = async (req, res) => {
     await Product.find({}, (err, products) => {
       if (err) res.status(500).json(err);
       if (products) {
-        res.header().json(products.map(({ _id, name, price, images }) => (
+        res.header('Cache-Control', 'max-age=7200').json(products.map(({ _id, name, price, images }) => (
           { _id, name, price, mainImage: {
             name: images[0].name,
             src: images[0].src,
