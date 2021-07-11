@@ -1,5 +1,9 @@
 @import '../../../styles/settings.scss';
 
-//.root {
+.root {
+  padding: $base-size;
 
-//}
+  .button {
+    margin-top: $base-size;
+  }
+}

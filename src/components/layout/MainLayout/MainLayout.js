@@ -9,7 +9,7 @@ import styles from './MainLayout.module.scss';
 const MainLayout = ({ children }) => (
   <div className={styles.root}>
     <Header />
-    <Container className={styles.container}>
+    <Container maxWidth="md" className={styles.container}>
       { children }
     </Container>
   </div>

@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAll, fetchAll } from '../../../redux/productsRedux';
 
+import Paper from '@material-ui/core/Paper';
+
 import ProductList from '../../features/ProductList/ProductList';
 
 import styles from './Home.module.scss';
@@ -15,9 +17,9 @@ const Home = () => {
   }, [dispatch]);
   
   return (
-    <div className={styles.root}>
+    <Paper className={styles.root}>
       <ProductList products={products} />
-    </div>
+    </Paper>
   );
 };
 

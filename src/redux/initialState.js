@@ -8,8 +8,14 @@ export const initialState = {
       error: false,
     },
   },
-  orders: {
-    data: [],
+  order: {
+    data: {
+      products: [],
+      firstName: '',
+      lastName: '',
+      email: '',
+      address: '',
+    },
     request: {
       type: '',
       active: false,

@@ -2,4 +2,9 @@
 
 .root {
   padding: $base-size;
+
+  .input {
+    width: 40px;
+    margin-right: 8px;
+  }
 }

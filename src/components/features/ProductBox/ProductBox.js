@@ -20,7 +20,7 @@ const ProductBox = ({ product: { id, name, price, mainImage } }) => (
           {name}
         </Typography>
         <Typography display="block" align="right">
-          {price}$
+          from ${price}
         </Typography>
       </CardContent>
     </CardActionArea>
