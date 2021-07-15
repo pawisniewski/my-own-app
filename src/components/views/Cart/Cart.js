@@ -1,6 +1,6 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { getProducts } from '../../../redux/orderRedux';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getProducts, increaseAmount, decreaseAmount, removeProduct, addComment } from '../../../redux/orderRedux';
 
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -13,40 +13,98 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Alert from '@material-ui/lab/Alert';
+import IconButton from '@material-ui/core/IconButton';
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
+import DeleteIcon from '@material-ui/icons/Delete';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import Collapse from '@material-ui/core/Collapse';
+import TextField from '@material-ui/core/TextField';
 import { Link as RouterLink } from 'react-router-dom';
 
 import styles from './Cart.module.scss';
 
 const Cart = () => {
   const products = useSelector(getProducts);
-  const emptyCart = <Alert severity='info' variant='outlined'>Your cart is empty.</Alert>;
+  const dispatch = useDispatch();
+  const [activeComments, setActiveComments] = useState([]);
+
+  const toggleCommentActivity = (id) => {
+    if (activeComments.includes(id)) {
+      setActiveComments(activeComments.filter(item => item !== id));
+    }
+    else {
+      setActiveComments([...activeComments, id]);
+    }
+  };
+
+  const handleCommentChange = (event) => {
+    const {value: comment, id} = event.target;
+    dispatch(addComment({ id, comment }));
+  };
+
+  const emptyCart = <Alert severity="info" variant="outlined">Your cart is empty now.</Alert>;
 
   return (
     <Paper className={styles.root}>
       <Typography paragraph variant="h5" component="h2" align="center">Cart</Typography>
       {!products || products.length === 0 ? emptyCart : <div>
-        <TableContainer className={styles.table}>
+        <TableContainer>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Products</TableCell>
-                <TableCell>Amount</TableCell>
-                <TableCell>Cost</TableCell>
+                <TableCell align="left">Products</TableCell>
+                <TableCell align="center">Amount</TableCell>
+                <TableCell align="center">Cost</TableCell>
+                <TableCell align="right">Actions</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {products.map(({ id, name, price, amount }) => (
-                <TableRow key={id}>
-                  <TableCell component="th">{name}</TableCell>
-                  <TableCell>{amount}</TableCell>
-                  <TableCell>{amount * price}</TableCell>
+            {products.map(({ id, name, price, amount, comment }) => (
+              <TableBody key={id}>
+                <TableRow>
+                  <TableCell align="left">
+                    <Typography component={RouterLink} to={`/products/${id}`} className={styles.name} color="primary">
+                      {name}
+                    </Typography>
+                  </TableCell>
+                  <TableCell align="center">
+                    <IconButton onClick={() => dispatch(decreaseAmount(id))} size="small" color="primary">
+                      <RemoveIcon />
+                    </IconButton>
+                    {amount}
+                    <IconButton onClick={() => dispatch(increaseAmount(id))} size="small" color="secondary">
+                      <AddIcon />
+                    </IconButton>
+                  </TableCell>
+                  <TableCell align="center">
+                    ${price * amount}
+                  </TableCell>
+                  <TableCell align="right" className={styles.actionButtons}>
+                    <IconButton onClick={() => dispatch(removeProduct(id))} size="small" color="secondary">
+                      <DeleteIcon />
+                    </IconButton>
+                    {!comment &&
+                      <IconButton onClick={() => toggleCommentActivity(id)} size="small" color="primary">
+                        {activeComments.includes(id) ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                      </IconButton>}
+                  </TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
+                <TableRow>
+                  <TableCell align="center" className={styles.comment} colSpan={4}>
+                    <Collapse in={!!comment || activeComments.includes(id)} timeout="auto">
+                      <TextField id={id} name={`${id}-comment`} placeholder="Add comment ..." fullWidth multiline
+                        autoComplete="off" inputProps={{ maxLength: 500 }} value={comment} onChange={handleCommentChange} 
+                      />
+                    </Collapse>
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            ))}
           </Table>
         </TableContainer>
         <Grid align="right">
-          <Button component={RouterLink} to='/order' variant='contained' color='primary' className={styles.button}>Order</Button>
+          <Button component={RouterLink} to="/order" variant="contained" color="primary" className={styles.orderButton}>Order</Button>
         </Grid>
       </div>}
     </Paper>

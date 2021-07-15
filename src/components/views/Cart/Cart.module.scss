@@ -3,7 +3,25 @@
 .root {
   padding: $base-size;
 
-  .button {
+  .name {
+    text-decoration: none;
+  }
+
+  .comment {
+    padding-top: 1px;
+  }
+
+  td {
+    border-bottom: none;
+    padding-bottom: 1px;
+  }
+
+  .actionButtons {
+    padding-right: 10px;
+  }
+
+  .orderButton {
     margin-top: $base-size;
   }
+  
 }
