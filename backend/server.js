@@ -4,6 +4,7 @@ const path = require('path');
 const helmet = require('helmet');
 
 const connectToDB = require('./db');
+const { dbURI } = require('./config');
 const productsRoutes = require('./routes/products.routes');
 const ordersRoutes = require('./routes/orders.routes');
 
@@ -37,6 +38,6 @@ const server = app.listen(port, () => {
 });
 
 /* CONNECT TO DB */
-connectToDB();
+connectToDB(dbURI);
 
 module.exports = server;
