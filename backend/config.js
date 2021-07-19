@@ -6,7 +6,7 @@ switch (process.env.NODE_ENV) {
     break;
 
   case 'production':
-    dbURI = 'mongodb+srv://pawel_wisniewski:gIzZqp8Oag4u37z2@cluster2.lrtqc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+    dbURI = `mongodb+srv://pawel_wisniewski:${process.env.DB_PASSWORD}@cluster2.lrtqc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
     break;
 
   default:
