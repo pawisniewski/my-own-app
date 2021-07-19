@@ -9,7 +9,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Alert from '@material-ui/lab/Alert';
@@ -57,7 +56,7 @@ const Cart = () => {
                 <TableCell align="left">Products</TableCell>
                 <TableCell align="center">Amount</TableCell>
                 <TableCell align="center">Cost</TableCell>
-                <TableCell align="right">Actions</TableCell>
+                <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
             {products.map(({ id, name, price, amount, comment }) => (
@@ -80,32 +79,39 @@ const Cart = () => {
                   <TableCell align="center">
                     ${price * amount}
                   </TableCell>
-                  <TableCell align="right" className={styles.actionButtons}>
-                    <IconButton onClick={() => dispatch(removeProduct(id))} size="small" color="secondary">
-                      <DeleteIcon />
-                    </IconButton>
+                  <TableCell align="center">
                     {!comment &&
                       <IconButton onClick={() => toggleCommentActivity(id)} size="small" color="primary">
                         {activeComments.includes(id) ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                       </IconButton>}
+                    <IconButton onClick={() => dispatch(removeProduct(id))} size="small" color="secondary">
+                      <DeleteIcon />
+                    </IconButton>
                   </TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell align="center" className={styles.comment} colSpan={4}>
+                  <TableCell align="justify" className={styles.comment} colSpan={4}>
                     <Collapse in={!!comment || activeComments.includes(id)} timeout="auto">
-                      <TextField id={id} name={`${id}-comment`} placeholder="Add comment ..." fullWidth multiline
-                        autoComplete="off" inputProps={{ maxLength: 500 }} value={comment} onChange={handleCommentChange} 
+                      <TextField size="small" className={styles.commentField} id={id} name={`${id}-comment`} placeholder="Add comment ..." 
+                        autoComplete="off" inputProps={{ maxLength: 500 }} value={comment} onChange={handleCommentChange} maxRows="3" fullWidth multiline
                       />
                     </Collapse>
                   </TableCell>
                 </TableRow>
               </TableBody>
             ))}
+            <TableBody>
+              <TableRow>
+                <TableCell></TableCell>
+              </TableRow>
+              <TableRow className={styles.border}>
+                <TableCell align="center" colSpan={4}>
+                  <Button component={RouterLink} to="/order" variant="contained" color="primary" className={styles.orderButton}>Order form</Button>
+                </TableCell>
+              </TableRow>
+            </TableBody>
           </Table>
         </TableContainer>
-        <Grid align="right">
-          <Button component={RouterLink} to="/order" variant="contained" color="primary" className={styles.orderButton}>Order</Button>
-        </Grid>
       </div>}
     </Paper>
   );

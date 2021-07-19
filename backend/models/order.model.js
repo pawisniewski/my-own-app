@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { cartProductSchema } = require('./cartProduct.model');
 
-const cartSchema = new mongoose.Schema({
+const OrderSchema = new mongoose.Schema({
   products: {
     type: [cartProductSchema],
     required: true,
@@ -17,4 +17,4 @@ const cartSchema = new mongoose.Schema({
   address: { type: String, required: true, minLength: 5, maxLength: 50  },
 });
 
-module.exports = mongoose.model('Cart', cartSchema);
+module.exports = mongoose.model('Order', OrderSchema);

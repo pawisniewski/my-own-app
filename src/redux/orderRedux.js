@@ -1,5 +1,5 @@
-//import axios from 'axios';
-//import { API_URL } from '../config';
+import axios from 'axios';
+import { API_URL } from '../config';
 
 /* selectors */
 export const getOrder = ({ order }) => order.data;
@@ -24,6 +24,8 @@ const REMOVE_PRODUCT = createActionName('REMOVE_PRODUCT');
 const INCREASE_AMOUNT = createActionName('INCREASE_AMOUNT');
 const DECREASE_AMOUNT = createActionName('DECREASE_AMOUNT');
 const ADD_COMMENT = createActionName('ADD_COMMENT');
+const STORE_INPUT = createActionName('STORE_INPUT');
+const ORDER_SAVED = createActionName('ORDER_SAVED');
 const REQUEST_ERROR = createActionName('REQUEST_ERROR');
 
 /* action creators */
@@ -33,9 +35,22 @@ export const removeProduct = payload => ({ payload, type: REMOVE_PRODUCT });
 export const increaseAmount = payload => ({ payload, type: INCREASE_AMOUNT });
 export const decreaseAmount = payload => ({ payload, type: DECREASE_AMOUNT });
 export const addComment = payload => ({ payload, type: ADD_COMMENT });
+export const storeInput = payload => ({ payload, type: STORE_INPUT });
+export const orderSaved = payload => ({ payload, type: ORDER_SAVED });
 export const requestError = payload => ({ payload, type: REQUEST_ERROR });
 
 /* thunk creators */
+export const sendOrder = (orderData) => {
+  return async dispatch => {
+    dispatch(startRequest('POST'));
+    try {
+      const res = await axios.post(`${API_URL}/orders`, orderData);
+      dispatch(orderSaved(res.data));
+    } catch(err) {
+      dispatch(requestError(err.message || true));
+    }
+  };
+};
 
 /* reducer */
 export const reducer = (statePart = [], action = {}) => {
@@ -108,6 +123,31 @@ export const reducer = (statePart = [], action = {}) => {
         data: {
           ...statePart.data,
           products: newProducts,
+        },
+      };
+    }
+    case STORE_INPUT: {
+      return {
+        ...statePart,
+        data: {
+          ...statePart.data,
+          ...action.payload,
+        },
+      };
+    }
+    case ORDER_SAVED: {
+      return {
+        data: {
+          products: [],
+          firstName: '',
+          lastName: '',
+          email: '',
+          address: '',
+        },
+        request: {
+          ...statePart.request,
+          active: false,
+          error: false,
         },
       };
     }

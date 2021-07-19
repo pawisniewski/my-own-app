@@ -8,20 +8,20 @@
   }
 
   .comment {
-    padding-top: 1px;
+    padding-top: 0;
   }
 
   td {
     border-bottom: none;
-    padding-bottom: 1px;
+    padding-bottom: 0;
   }
 
-  .actionButtons {
-    padding-right: 10px;
+  .border {
+    border-top: 1px solid rgba(224, 224, 224, 1);
   }
 
   .orderButton {
-    margin-top: $base-size;
+    margin-top: 10px;
   }
   
 }

@@ -153,6 +153,36 @@ const loadInitData = async () => {
         src: 'https://images.pexels.com/photos/4913769/pexels-photo-4913769.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
       }],
     },
+    {
+      name: 'Product11',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod metus in tellus mattis congue. Donec finibus urna quis diam porta laoreet. Phasellus ultrices dictum.',
+      price: 110,
+      images: [{
+        name: 'image1',
+        src: 'https://images.pexels.com/photos/5428836/pexels-photo-5428836.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
+      },{
+        name: 'image2',
+        src: 'https://images.pexels.com/photos/3683053/pexels-photo-3683053.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
+      },{
+        name: 'image3',
+        src: 'https://images.pexels.com/photos/4913769/pexels-photo-4913769.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
+      }],
+    },
+    {
+      name: 'Product12',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod metus in tellus mattis congue. Donec finibus urna quis diam porta laoreet. Phasellus ultrices dictum.',
+      price: 120,
+      images: [{
+        name: 'image1',
+        src: 'https://images.pexels.com/photos/5428836/pexels-photo-5428836.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
+      },{
+        name: 'image2',
+        src: 'https://images.pexels.com/photos/3683053/pexels-photo-3683053.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
+      },{
+        name: 'image3',
+        src: 'https://images.pexels.com/photos/4913769/pexels-photo-4913769.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
+      }],
+    },
   ];
 
   try {
