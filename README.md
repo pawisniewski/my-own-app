@@ -1,6 +1,18 @@
-# Getting Started with Create React App
+# My Own App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Warring.
+The project is not finished. It will be updated soon...
+
+## Deployed on Heroku
+
+[MyOwnApp.herokuapp.com](https://tranquil-gorge-45592.herokuapp.com)
+
+## Running locally steps
+
+1. `yarn install`
+2. `yarn start-server`
+3. `yarn start`
 
 ## Available Scripts
 
